@@ -37,7 +37,7 @@ app.use(express.json());
 
 //use port acess controll
 app.use(cors({
-    origin:process.env.ORIGIN,
+    origin:{},
     credentials:true
 }));
 
