@@ -2,7 +2,7 @@ const User = require('../models/User');
 const { index } = require('./UserController');
 
 module.exports = {
-    async index(req,res){
+    async searchByEmail(req,res){
         console.log(req.query);
 
         const {email} = req.query;
@@ -13,5 +13,20 @@ module.exports = {
 
 
         return res.json(users);
+    },
+
+    async searchById(req,res){
+        console.log(req.query);
+
+        const {id} = req.query;
+
+        console.log(id);
+
+        const users = await User.find({name : id});
+
+
+        return res.json(users);
     }
+
+    
 }
