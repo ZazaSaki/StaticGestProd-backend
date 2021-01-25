@@ -59,10 +59,9 @@ module.exports = {
         console.log('Update Goal');
 
         //request
-        //const {email, id} = req.query;
+        const {id} = req.query;
         const dataUser = await User.findOne({email : req.user.email});
         
-        const {id} = dataUser;
         const {goal} = req.body;
         
         //data base
@@ -199,7 +198,7 @@ module.exports = {
         user = user ? user : await User.findOne({id});
 
         //dayList inicialization
-        const dayList = [{List:[], id:"1"}];
+        const dayList = [{List:[], id:"1", goal:0}];
 
         if (!user) {
             
