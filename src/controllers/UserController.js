@@ -189,12 +189,17 @@ module.exports = {
     },
 
     async store(req, res) {
+        
         //request
-        const {name, id, pass, email, dayList} = req.body;
+        const {name, id, pass, email} = req.body;
         const password = await bcrypt.hash(pass, 10);
+        
         //checking existing data
         let user = await User.findOne({email});
         user = user ? user : await User.findOne({id});
+
+        //dayList inicialization
+        const dayList = [{List:[], id:"1"}];
 
         if (!user) {
             
