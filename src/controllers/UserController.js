@@ -233,7 +233,7 @@ module.exports = {
         console.log("logged");
         console.log(req.isAuthenticated());
         console.log(req.user);
-        res.json(req.user);
+        res.json({user : req.user, authenticated : req.isAuthenticated()});
     },
 
     async login(req, res, next){
@@ -267,21 +267,24 @@ module.exports = {
 
     check(req,res,next) {
         console.log("checking....................");
+        
+        
         if (req.isAuthenticated()) {
-            
-            redirect(res, "/index");
-            return ;
+            return next();
         }
-        return next();
+        res.json({authenticated : req.isAuthenticated()});
+        return;
     },
 
     checkNot(req,res,next) {
         console.log("checking....................");
+        
         if (!req.isAuthenticated()) {
-            redirect(res, "/login");
-            return ;
+            return next();
         }
-        return next();
+        
+        res.json({authenticated : req.isAuthenticated()});
+        return;
     }
     
 }

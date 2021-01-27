@@ -26,22 +26,24 @@ routes.get('/user', UserController.user);
 routes.post('/register', UserController.store);
 routes.get('/logged', UserController.logged);
 
-routes.post('/login', UserController.check ,(req, res, next)=>{
+routes.post('/login', UserController.checkNot ,(req, res, next)=>{
     
     console.log("log in.............");
+    
     console.log(req.isAuthenticated());
 
     if(req.user){
         res.send("already logged");
         return(req, res, next);
     }
+    
     passport.authenticate("local", (err, user, info) => {
         if (err) throw err;
         if (!user) res.send("No User Exists");
         else {
             req.logIn(user, (err) => {
             if (err) throw err;
-            res.send(user);
+            res.send({user,authenticated:true});
             
             console.log(req.cookies);
             
