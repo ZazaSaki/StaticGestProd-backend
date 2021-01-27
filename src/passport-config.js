@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 const User = require('./models/User');
 
 function inicialize(passport, getUserByEmail, getUserById){
-    const authenticateUser = async (email, password, done)=>{
+    const authenticateUser = async (username, password, done)=>{
         //getting user
-        const user = await User.findOne({email:email});
+        const user = await User.findOne({email:username});
 
         //checking user in data base
         if (user==null) {
